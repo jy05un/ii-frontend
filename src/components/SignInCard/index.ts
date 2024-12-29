@@ -1,1 +1,1 @@
-export {default} from './SignInCard'
+export { default } from './SignInCard';

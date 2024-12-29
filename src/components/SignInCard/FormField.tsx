@@ -1,35 +1,35 @@
 import React, { ChangeEvent } from 'react';
 import { useState } from 'react';
+import styles from './SignInCard.module.css';
+import classNames from 'classnames';
 
 interface InputItemProps {
   name: string;
   title: string;
   value: string;
-  isPassword?: boolean;
+  type: string;
   className: string;
+  onChange?: any;
 }
 
 export default function FormField({
   name,
   title,
   value,
-  isPassword,
+  type,
   className,
+  onChange
 }: InputItemProps) {
-  const [val, setVal] = useState(value);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setVal(event.target.value)
-  }
   return (
-    <div className={className + ' ' + 'form-field'}>
+    <div className={classNames(className, styles.field)}>
       <label htmlFor={name}>{title}</label>
       <input
         className="form-field__input"
         id={name}
-        type={isPassword?"password":"text"}
+        type={type}
         name={name}
-        value={val}
+        value={value}
         title={title}
         onChange={onChange}
       />

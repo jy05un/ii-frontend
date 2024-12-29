@@ -1,8 +1,29 @@
-.root {
-  border: 1px;
-  width: 100%
+.signin-card {
+  border: 2px solid black;
+  max-width: 20rem;
+  margin: 0 auto;
+  padding: 1vh 0.25vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-  font-size: 100px
+  font-size: 32px;
+  margin: 0 auto;
+}
+
+.fields {
+  
+}
+
+.field {
+  
+}
+
+.id {
+  
+}
+
+.password {
+
 }

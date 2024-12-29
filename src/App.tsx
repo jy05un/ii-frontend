@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from 'pages/Home';
 import SignInPage from 'pages/SignInPage'
 import SignUpPage from 'pages/SignUpPage';
@@ -24,7 +24,9 @@ function App() {
             <Route path="/pinned" element={<PinnedPage/>}/>
             <Route path="/board" element={<BoardPage/>}/>
             <Route path="/board/:id" element={<PostPage/>}/>
+            <Route index element={<Navigate to="/feeds" replace/>}/>
           </Route>
+          <Route path="*" element={<Navigate to="/feeds" replace/>}/>
         </Routes>
       </BrowserRouter>
     </div>
