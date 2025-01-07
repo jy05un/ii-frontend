@@ -1,0 +1,69 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.profile {
+  font-size: 32px;
+  margin: 0 auto;
+}
+
+.identity {
+  display: flex;
+  flex-grow: 2;
+  text-align: left;
+  flex-direction: row;
+  justify-content: start;
+  gap: 4px;
+}
+
+.name {
+
+}
+
+.source {
+  width:auto;
+  height:16px;
+}
+
+.source img {
+  width:auto;
+  height:16px;
+}
+
+.date {
+  
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+
+}
+
+.like {
+
+}
+
+.bookmark {
+
+}
+
+.share {
+
+}

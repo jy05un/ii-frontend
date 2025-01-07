@@ -1,0 +1,53 @@
+.field {
+  --pad: .75rem;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.fieldInput {
+  border-radius: 8px;
+  border: 2px solid black;
+  outline: none;
+  height: 3em;
+  width: 100%;
+}
+
+.fieldInput::placeholder {
+  opacity: 0;
+}
+
+.fieldLabel {
+  position: absolute;
+  left: var(--pad);
+  top: var(--pad);
+  pointer-events: none;
+  transition: transform 200ms;
+  background: white;
+  transform-origin: left;
+  translate: -.3em;
+}
+
+.fieldInputWrong:not(:placeholder-shown){
+  border: 2px solid red;
+}
+
+
+.fieldInputWrong:not(:placeholder-shown) + label {
+  color: red;
+}
+
+
+
+.fieldInput:focus + label,
+.fieldInput:not(:placeholder-shown) + label {
+  transform: translateY(calc(-50% - var(--pad))) scale(.8);
+}
+
+.fieldInput:focus + label {
+  color: blue;
+}
+
+.fieldInput:focus {
+  border: 2px solid blue;
+}
