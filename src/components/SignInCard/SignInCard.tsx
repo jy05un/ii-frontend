@@ -1,14 +1,20 @@
 import React, { ChangeEvent, useState } from 'react';
-import FormField from './FormField';
+import FormField from '../FormField/FormField';
 import styles from './SignInCard.module.css';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 interface SignInCardProps {
-  _username?: string;
-  _password?: string;
+  username?: string;
+  password?: string;
+  className?: string;
 }
 
-export default function SignInCard({ _username, _password }: SignInCardProps) {
+export default function SignInCard({
+  username: _username,
+  password: _password,
+  className,
+}: SignInCardProps) {
   const [username, setUsername] = useState(_username || '');
   const [password, setPassword] = useState(_password || '');
 
@@ -20,27 +26,30 @@ export default function SignInCard({ _username, _password }: SignInCardProps) {
         password,
       }),
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
       },
     })
       .then((res) => res.json())
       .then((result) => {
-        alert(result);
+        alert('로그인 성공! 기모따!');
       })
       .catch((e) => {
         console.log(e);
       });
   };
   return (
-    <div className={styles['signin-card']}>
+    <div className={classNames(className, styles.signInCard)}>
+      <div className={styles.header}>
+        <h1 className={styles.title}> signin </h1>
+      </div>
       <form
+        className={styles.forms}
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
         action="#"
       >
-        <span className={styles.title}> title </span>
         <FormField
           className={classNames(styles.field, styles.id)}
           name="username"
@@ -63,6 +72,9 @@ export default function SignInCard({ _username, _password }: SignInCardProps) {
         />
         <button type="submit" hidden></button>
       </form>
+      <div className={styles.menus}>
+        <Link to="/signup">Sign up</Link>
+      </div>
     </div>
   );
 }
