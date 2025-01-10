@@ -1,0 +1,276 @@
+.feed {
+  width: 540px;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  min-height: 100px;
+}
+
+.header {
+  width: 100%;
+  padding: 10px;
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box;     
+  box-sizing: border-box; 
+  height: 54px;
+  display: flex;
+}
+
+.profile {
+  display: flex;
+}
+
+.profileAvatar {
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+
+}
+
+.profileAvatarImg {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #DBDBDB;
+  border-radius: 50%;
+}
+
+.profileInfo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.profileNameAndId {
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profileId {
+  color: rgb(115, 115, 115);
+  margin-left: 5px;
+}
+
+.profileSubs {
+  color: rgb(115, 115, 115);
+  line-height: 14px;
+  font-size: 12px;
+}
+
+.viewProfileButton {
+  margin-left: auto;
+  align-content: center;
+}
+
+.viewProfileButtonA {
+  text-decoration: none;
+  color: white;
+  height: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: rgb(0, 149, 246);
+  border-radius: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.attachmentArea {
+  width: 100%;
+}
+
+.sliderWrapper {
+  position: relative;
+}
+
+.viewBeforeButton {
+  width: 30px;
+  height: 30px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  z-index: 2;
+}
+
+.viewBeforeButton:hover {
+  cursor: pointer;
+}
+
+.viewBeforeButtonIcon {
+  background: url('../../../public/img/TJztmXpWTmS.png') no-repeat -130px -98px;
+	width: 30px;
+	height: 30px;
+}
+
+.viewNextButton {
+  right: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  z-index: 2;
+}
+
+.viewNextButton:hover {
+  cursor: pointer;
+}
+
+.viewNextButtonIcon {
+  background: url('../../../public/img/TJztmXpWTmS.png') no-repeat -162px -98px;
+	width: 30px;
+	height: 30px;
+}
+
+.viewIndex {
+  width: 100%;
+  padding-left: 6px;
+  padding-right: 6px;
+  height: 6px;
+  bottom: 15px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.viewIndexIcon {
+  border-radius: 50%;
+  background-color: white;
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  opacity: 0.4;
+}
+
+.viewIndexIcon.current {
+  border-radius: 50%;
+  background-color: white;
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  opacity: 1;
+}
+
+.sliderFrameWrapper {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.sliderFrame {
+  flex: 0 0 100%;
+  margin-left: 0px;
+  z-index: 0;
+}
+
+.sliderImg {
+  width: 100%;
+}
+
+.slide-enter {
+}
+.slide-enter-active {
+  transition-duration: 0.336s;
+}
+
+.slide-exit {
+}
+.slide-exit-active {
+  transition-duration: 0.336s;
+}
+
+.viewMore {
+  width: auto;
+  height: 44px;
+  margin-left: 12px;
+  margin-right: 12px;
+  line-height: 44px;
+}
+
+.viewMoreA {
+  text-decoration: none;
+  color: rgb(0, 149, 246);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.feedback {
+  width: auto;
+  height: 24px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-top: 1px solid #DBDBDB;
+  display: flex;
+}
+
+.like {
+  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -87px -137px;
+	width: 24px;
+	height: 22px;
+  margin-right: 12px;
+}
+
+.comment {
+  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -37px -136px;
+	width: 24px;
+	height: 24px;
+  margin-right: 12px;
+}
+
+.share {
+  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -51px -173px;
+	width: 21px;
+	height: 24px;
+  margin-right: 12px;
+}
+
+.save {
+  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -28px -173px;
+	width: 19px;
+	height: 24px;
+  margin-left: auto;
+}
+
+.caption {
+  margin: 8px;
+  margin-top: 0px;
+  line-height: 18px;
+  font-size: 14px;
+  color: rgb(28, 30, 33);
+}
+
+.footer {
+  height: 45px;
+  padding-right: 10px;
+  border-top: 1px solid #DBDBDB;
+  align-items: center;
+  display: flex;
+}
+
+.date {
+  height: 45px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-top: 1px solid #DBDBDB;
+  align-items: center;
+  display: flex;
+  color: rgb(115, 115, 115);
+}
+
+.logo {
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+}

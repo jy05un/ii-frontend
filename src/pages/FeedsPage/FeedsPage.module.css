@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.feedsPage {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.feedsArray {
+  min-width: 400px;
+  max-width: 548px;
+  width: 40vw;
+  margin: 0 auto;
+}
+
+.feeds {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}

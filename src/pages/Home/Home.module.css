@@ -1,0 +1,14 @@
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.navbar {
+  width: 6em;
+}
+
+.body {
+  flex: 1;
+}
