@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 body {
   margin: 0;
   padding: 0;
 }
 
+=======
+>>>>>>> ffb100090a4c0238f4b49072b2a3c58127c54974
 .feedsPage {
   height: 100%;
   overflow-y: scroll;
@@ -10,7 +13,10 @@ body {
 
 .feedsArray {
   min-width: 400px;
+<<<<<<< HEAD
   max-width: 548px;
+=======
+>>>>>>> ffb100090a4c0238f4b49072b2a3c58127c54974
   width: 40vw;
   margin: 0 auto;
 }

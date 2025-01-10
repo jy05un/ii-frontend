@@ -8,6 +8,7 @@ import BookmarkUrl from './icon_bookmark_border.svg';
 import BookmarkFilledUrl from './icon_like_filled.svg';
 import ShareUrl from './icon_share.svg';
 import classNames from 'classnames';
+
 import SliderWrapper from './SliderWrapper';
 
 export type sources = 'youtube' | 'soup' | 'x' | 'instagram';
@@ -120,6 +121,4 @@ export default function Feed({
       </div>
     </div>
   );
-
-  
 }

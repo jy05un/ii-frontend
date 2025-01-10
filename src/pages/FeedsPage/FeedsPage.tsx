@@ -3,6 +3,7 @@ import styles from './FeedsPage.module.css';
 import Feed from 'components/Feed';
 import { FeedProps, AttachmentType, Img } from 'components/Feed/Feed';
 
+
 export default function FeedsPage() {
   const feedsList: (FeedProps & { id: number })[] = [
     {
