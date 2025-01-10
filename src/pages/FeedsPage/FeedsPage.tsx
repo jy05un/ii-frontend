@@ -1,55 +1,45 @@
 import React from 'react';
 import styles from './FeedsPage.module.css';
 import Feed from 'components/Feed';
-import { FeedProps } from 'components/Feed/Feed';
+import { FeedProps, AttachmentType, Img } from 'components/Feed/Feed';
+
 
 export default function FeedsPage() {
   const feedsList: (FeedProps & { id: number })[] = [
     {
       id: 1,
-      profileUrl: 'https://placehold.co/64x64',
-      name: 'Necesarilly Long Name',
-      source: 'youtube',
+      profile: {
+        name: "주르르",
+        id: "@jururu_twitch",
+        url: "https://x.com/jururu_twitch",
+        imgUrl: "https://pbs.twimg.com/profile_images/1723398787857854464/s7N2UgUv_200x200.jpg"
+      },
+      source: "x",
+      title: "임시 제목~",
+      content: "차세돌 엔딩기념! 연재전 컨셉아트 공개스 (여비날 님)",
       date: new Date(),
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      id: 2,
-      profileUrl: 'https://placehold.co/64x64',
-      name: 'name',
-      source: 'youtube',
-      date: new Date(),
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      id: 3,
-      profileUrl: 'https://placehold.co/64x64',
-      name: 'name',
-      source: 'youtube',
-      date: new Date(),
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      id: 4,
-      profileUrl: 'https://placehold.co/64x64',
-      name: 'name',
-      source: 'youtube',
-      date: new Date(),
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      id: 5,
-      profileUrl: 'https://placehold.co/64x64',
-      name: 'name',
-      source: 'youtube',
-      date: new Date(),
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
+      url: "https://x.com/jururu_twitch/status/1816738805929632036",
+      attachments: [
+        {
+          type: "Img",
+          url: "https://pbs.twimg.com/media/GAQMFVua0AAxu1l?format=jpg&name=360x360"
+        } as Img,
+        {
+          type: "Img",
+          url: "https://pbs.twimg.com/media/GAQMFm4aIAEl2Ps?format=jpg&name=360x360"
+        } as Img,
+        {
+          type: "Img",
+          url: "https://pbs.twimg.com/media/GAQMF2DbwAAo36P?format=jpg&name=360x360"
+        } as Img,
+        {
+          type: "Img",
+          url: "https://pbs.twimg.com/media/GAQMGEob0AAyGn2?format=jpg&name=360x360"
+        } as Img
+      ],
+      logoImgUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1134px-X_logo_2023.svg.png",
+      logoUrl: "https://x.com/"
+    }
   ];
 
   return (
@@ -59,12 +49,16 @@ export default function FeedsPage() {
           {feedsList.map((f) => (
             <Feed
               className={styles.feed}
-              key={f.name}
-              profileUrl={f.profileUrl}
-              name={f.name}
+              key={f.id}
+              profile={f.profile}
               source={f.source}
-              date={f.date}
+              title={f.title}
               content={f.content}
+              date={f.date}
+              url={f.url}
+              attachments={f.attachments}
+              logoImgUrl={f.logoImgUrl}
+              logoUrl={f.logoUrl}
             />
           ))}
         </div>
