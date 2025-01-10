@@ -70,7 +70,6 @@ export default function SliderWrapper({
       </div>
       <CSSTransition
         in={inProp}
-        key={uuid()}
         timeout={336}
         classNames={"slide"}
         nodeRef={nodeRef}
