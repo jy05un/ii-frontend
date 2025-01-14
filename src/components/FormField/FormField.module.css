@@ -2,7 +2,7 @@
   --pad: .75rem;
   position: relative;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
 .fieldInput {
@@ -10,7 +10,7 @@
   border: 2px solid black;
   outline: none;
   height: 3em;
-  width: 100%;
+  width: calc(100% - var(--pad));
 }
 
 .fieldInput::placeholder {

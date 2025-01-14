@@ -70,10 +70,18 @@ export default function SignInCard({
             setPassword(e.target.value)
           }
         />
-        <button type="submit" hidden></button>
+        <button className={styles.confirm} title="로그인" type="submit">
+          로그인
+        </button>
       </form>
       <div className={styles.menus}>
-        <Link to="/signup">Sign up</Link>
+        <Link to="/signup">
+          <span> 회원가입</span>
+        </Link>
+
+        {/*
+        <span> 도움... </span>
+        */}
       </div>
     </div>
   );

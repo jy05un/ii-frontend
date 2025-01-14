@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import FormField from 'components/FormField';
-import styles from './SignUpCard.module.css';
+import styles from './ProfileCard.module.css';
 import classNames from 'classnames';
 
-interface SignUpCardProps {
+interface ProfileCardProps {
   username?: string;
   password?: string;
   email?: string;
@@ -11,13 +11,13 @@ interface SignUpCardProps {
   className?: string;
 }
 
-export default function SignUpCard({
+export default function ProfileCard({
   username: _username,
   password: _password,
   email: _email,
   nickname: _nickname,
   className
-}: SignUpCardProps) {
+}: ProfileCardProps) {
   const [username, setUsername] = useState(_username || '');
   const [isUsernameValid, setUsernameValid] = useState(true);
 
@@ -96,9 +96,9 @@ export default function SignUpCard({
   };
 
   return (
-    <div className={classNames(className, styles.signUpCard)}>
+    <div className={classNames(className, styles.profileCard)}>
       <div className={styles.header}>
-        <h1 className={styles.title}> signup </h1>
+        <h1 className={styles.title}> profile </h1>
       </div>
       <form
         className={styles.forms}
@@ -150,9 +150,10 @@ export default function SignUpCard({
             setNickname(e.target.value)
           }
         />
-        <button className={styles.confirm} title="회원가입" type="submit">회원가입</button>
+        <button type="submit" hidden></button>
       </form>
       <div className={styles.menus}>
+
       </div>
     </div>
   );

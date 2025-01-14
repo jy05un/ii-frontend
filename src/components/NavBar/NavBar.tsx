@@ -1,5 +1,5 @@
-import React from 'react';
-import NavButton from './NavButton';
+import React, { useRef, useState } from 'react';
+import NavButton, { NavButtonProps } from './NavButton';
 import styles from './NavBar.module.css';
 import AccountUrl from './icon_account.svg';
 import BoardUrl from './icon_board.svg';
@@ -7,15 +7,18 @@ import FeedsUrl from './icon_feeds.svg';
 import PinUrl from './icon_pin.svg';
 import SettingUrl from './icon_setting.svg';
 import classNames from 'classnames';
+import PageModal from 'components/PageModal';
+import SignUpCard from 'components/SignUpCard';
+import SignInCard from 'components/SignInCard';
+import ProfileCard from 'components/ProfileCard';
 
-interface ButtonInfo {
-  name: string;
-  link: string;
-  icon: any;
-}
+export default function Navbar({ className }: { className?: string }) {
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
-export default function Navbar({className}: {className?: string}) {
-  const buttonInfos: ButtonInfo[] = [
+  const signInModalRef = useRef<HTMLDialogElement>(null);
+  const profileModalRef = useRef<HTMLDialogElement>(null);
+
+  const buttonInfos: NavButtonProps[] = [
     {
       name: 'feeds',
       link: '/feeds',
@@ -33,15 +36,40 @@ export default function Navbar({className}: {className?: string}) {
     },
   ];
 
+  const onLoginChanged = ({ target }: { target: HTMLInputElement }) => {
+    setLoggedIn(target.checked);
+  };
+
+  const onClickAccount = () => {
+    if (isLoggedIn) {
+      profileModalRef.current?.showModal();
+    } else {
+      signInModalRef.current?.showModal();
+    }
+  };
+
   return (
     <div className={classNames(className, styles.navbar)}>
-      <NavButton link="/login" icon={AccountUrl}/>
+      <input type="checkbox" onChange={(e) => onLoginChanged(e)} />
+      <NavButton name="account" icon={AccountUrl} onClick={onClickAccount} />
+
       <div className={styles.buttons}>
         {buttonInfos.map((info) => (
-          <NavButton key={info.name} link={info.link} icon={info.icon} />
+          <NavButton
+            key={info.name}
+            name="login"
+            link={info.link}
+            icon={info.icon}
+          />
         ))}
       </div>
-      <NavButton link="/setting" icon={SettingUrl}/>
+      <NavButton name="setting" link="/setting" icon={SettingUrl} />
+      <PageModal ref={signInModalRef} link="/login">
+        <SignInCard />
+      </PageModal>
+      <PageModal ref={profileModalRef} link="/profile">
+        <ProfileCard />
+      </PageModal>
     </div>
   );
 }
