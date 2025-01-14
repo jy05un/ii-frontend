@@ -1,5 +1,4 @@
 .signUpCard {
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,40 +7,42 @@
 .header {
   display: flex;
   justify-content: center;
-  text-align:center;
-  height: 6em;
+  text-align: center;
+  height: 5em;
 }
-
 
 .title {
   margin: 0 auto;
 }
 
 .forms {
-  flex-grow: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
-.fields {
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  gap: 1em;
+  margin: 0 auto;
 }
 
 .field {
-  
 }
 
 .id {
-  
 }
 
 .password {
+}
 
+.confirm {
+  height: 3em;
+  width: 100%;
 }
 
 .menus {
-
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
 }

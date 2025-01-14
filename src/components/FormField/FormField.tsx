@@ -25,7 +25,6 @@ export default function FormField({
   return (
     <div className={classNames(className, styles.field)}>
       <input
-        id={name}
         className={classNames(
           styles.fieldInput,
           invalid? styles.fieldInputWrong : '',
