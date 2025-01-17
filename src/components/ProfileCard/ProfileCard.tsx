@@ -44,7 +44,7 @@ export default function ProfileCard({
 
   const checkUsername = () => {
     if (username === '') return;
-    fetch(`http://52.141.48.164:8080/api/users/exists/${username}`, {
+    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/api/users/exists/${username}`, {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -74,7 +74,7 @@ export default function ProfileCard({
       alert('email not valid');
       return;
     }
-    fetch('http://52.141.48.164:8080/auth/register', {
+    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/auth/register`, {
       method: 'post',
       body: JSON.stringify({
         username,
