@@ -19,7 +19,7 @@ export default function SignInCard({
   const [password, setPassword] = useState(_password || '');
 
   const onSubmit = () => {
-    fetch('http://52.141.48.164:8080/auth/login', {
+    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/auth/login`, {
       method: 'post',
       body: JSON.stringify({
         username,
