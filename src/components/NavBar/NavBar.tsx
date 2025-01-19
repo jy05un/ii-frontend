@@ -11,9 +11,12 @@ import PageModal from 'components/PageModal';
 import SignUpCard from 'components/SignUpCard';
 import SignInCard from 'components/SignInCard';
 import ProfileCard from 'components/ProfileCard';
+import apiClient from 'api/apiClient';
+import { useAuth } from 'hooks/useAuth';
 
 export default function Navbar({ className }: { className?: string }) {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const { identity, fetchIdentity, refresh } = useAuth();
 
   const signInModalRef = useRef<HTMLDialogElement>(null);
   const profileModalRef = useRef<HTMLDialogElement>(null);
@@ -50,7 +53,32 @@ export default function Navbar({ className }: { className?: string }) {
 
   return (
     <div className={classNames(className, styles.navbar)}>
-      <input type="checkbox" onChange={(e) => onLoginChanged(e)} />
+      <div>
+        <input type="checkbox" onChange={(e) => onLoginChanged(e)} />
+        <button
+          onClick={() =>
+            fetchIdentity().then(() => {
+              alert(
+                'username: ' +
+                  identity?.username +
+                  ', \n' +
+                  'id: ' +
+                  identity?.id +
+                  ', \n' +
+                  'email: ' +
+                  identity?.email +
+                  ', \n' +
+                  'role: ' +
+                  identity?.role,
+              );
+              console.log(identity);
+            })
+          }
+        >
+          {identity?.username || 'whoami'}
+        </button>
+      </div>
+
       <NavButton name="account" icon={AccountUrl} onClick={onClickAccount} />
 
       <div className={styles.buttons}>
