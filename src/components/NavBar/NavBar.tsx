@@ -16,7 +16,7 @@ import { useAuth } from 'hooks/useAuth';
 
 export default function Navbar({ className }: { className?: string }) {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const { refresh } = useAuth();
+  const { identity, refresh } = useAuth();
 
   const signInModalRef = useRef<HTMLDialogElement>(null);
   const profileModalRef = useRef<HTMLDialogElement>(null);
@@ -40,7 +40,7 @@ export default function Navbar({ className }: { className?: string }) {
   ];
 
   const onLoginChanged = ({ target }: { target: HTMLInputElement }) => {
-    refresh()
+    identity()
     setLoggedIn(target.checked);
   };
 

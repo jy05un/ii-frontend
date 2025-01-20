@@ -10,6 +10,7 @@ import React, {
 import { UserAuthData, UserData } from 'types/auth';
 
 interface AuthContextType {
+  identity: () => Promise<UserData>;
   login: (_userData: UserAuthData) => Promise<void>;
   logout: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -34,12 +35,12 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
 }: AuthProviderProps) => {
-  // apiClient
-  //   .get('/api/user')
-  //   .then((res) => {
-  //     alert(res.data);
-  //   })
-  //   .catch((e) => console.log(e));
+
+  const identity = async () => {
+    const response = await apiClient.get('/api/user')
+    alert(response.data)
+    return response.data
+  }
 
   const login = async ({ username, password }: UserAuthData) => {
     const response = await apiClient.post('/auth/login', {
@@ -84,6 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   return (
     <AuthContext.Provider
       value={{
+        identity,
         login,
         logout,
         refresh,
