@@ -35,7 +35,6 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
 }: AuthProviderProps) => {
-
   const identity = async () => {
     const response = await apiClient.get('/api/user')
     alert(response.data)

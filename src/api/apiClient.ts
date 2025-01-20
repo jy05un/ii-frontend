@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { access } from 'fs';
 import Cookies from 'js-cookie';
 
 const apiClient = axios.create({
