@@ -34,6 +34,13 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
 }: AuthProviderProps) => {
+  // apiClient
+  //   .get('/api/user')
+  //   .then((res) => {
+  //     alert(res.data);
+  //   })
+  //   .catch((e) => console.log(e));
+
   const login = async ({ username, password }: UserAuthData) => {
     const response = await apiClient.post('/auth/login', {
       username,
@@ -42,11 +49,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     if (response.status !== 200) {
       throw Error('failed to login');
     }
-    const accessToken = response.headers.Authorization
+    const accessToken = response.headers['authorization']
       ?.toString()
       .replace('Bearer: ', '')
       .trim();
-    console.log('Authorization: ' + response.headers) 
+    console.log('Authorization: ' + response.headers);
     console.log('accessToken: ' + accessToken);
     if (!accessToken) {
       throw Error('Access token not provided');
@@ -59,7 +66,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   };
 
   const refresh = async () => {
-    await apiClient.post('/auth/refresh');
+    const response = await apiClient.post('/auth/refresh');
+    if (response.status !== 200) {
+      throw Error('failed to refresh');
+    }
+    const accessToken = response.headers['authorization']
+      ?.toString()
+      .replace('Bearer: ', '')
+      .trim();
+    console.log('accessToken: ' + accessToken);
+    if (!accessToken) {
+      throw Error('Access token not provided');
+    }
+    Cookies.set('accessToken', accessToken, { expires: 4 });
   };
 
   return (

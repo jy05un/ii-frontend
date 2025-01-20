@@ -11,9 +11,12 @@ import PageModal from 'components/PageModal';
 import SignUpCard from 'components/SignUpCard';
 import SignInCard from 'components/SignInCard';
 import ProfileCard from 'components/ProfileCard';
+import apiClient from 'api/apiClient';
+import { useAuth } from 'hooks/useAuth';
 
 export default function Navbar({ className }: { className?: string }) {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const { refresh } = useAuth();
 
   const signInModalRef = useRef<HTMLDialogElement>(null);
   const profileModalRef = useRef<HTMLDialogElement>(null);
@@ -37,6 +40,7 @@ export default function Navbar({ className }: { className?: string }) {
   ];
 
   const onLoginChanged = ({ target }: { target: HTMLInputElement }) => {
+    refresh()
     setLoggedIn(target.checked);
   };
 

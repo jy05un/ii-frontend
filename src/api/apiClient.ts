@@ -42,7 +42,7 @@ apiClient.interceptors.response.use(
         isRefreshing = true;
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_WAS_SERVER}/api/refresh`,
+            `${process.env.REACT_APP_WAS_SERVER}/auth/refresh`,
           );
           const accessToken = response.headers['Authorization']
             ?.toString()
