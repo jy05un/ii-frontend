@@ -1,17 +1,23 @@
 import apiClient from 'api/apiClient';
+import { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
 import React, {
   createContext,
   ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
-import { UserAuthData, UserData } from 'types/auth';
+import { useRouteLoaderData } from 'react-router';
+import { AuthData } from 'types/auth';
+import { UserData } from 'types/user';
+import retrieveAccessToken from 'utils/retrieveAccessToken';
 
 interface AuthContextType {
-  identity: () => Promise<UserData>;
-  login: (_userData: UserAuthData) => Promise<void>;
+  identity: UserData | null;
+  fetchIdentity: () => Promise<UserData | null>;
+  login: (_userData: AuthData) => Promise<void>;
   logout: () => Promise<void>;
   refresh: () => Promise<void>;
 }
@@ -35,13 +41,41 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
 }: AuthProviderProps) => {
-  const identity = async () => {
-    const response = await apiClient.get('/api/user')
-    alert(response.data)
-    return response.data
-  }
+  const [identity, setIdentity] = useState<UserData | null>(null);
+  const fetchIdentityCallbacks = useRef<
+    ((newIdentity: UserData | null) => void)[]
+  >([]);
 
-  const login = async ({ username, password }: UserAuthData) => {
+  useEffect(() => {
+    fetchIdentity();
+  }, []);
+
+  useEffect(() => {
+    if (fetchIdentityCallbacks.current.length > 0) {
+      console.log('useEffect');
+      const callbacks = [...fetchIdentityCallbacks.current];
+      fetchIdentityCallbacks.current = [];
+      callbacks.forEach((resolve) => resolve(identity));
+    }
+  }, [identity]);
+
+  const fetchIdentity = (): Promise<UserData | null> => {
+    return new Promise((resolve, reject) => {
+      apiClient
+        .get('/api/user')
+        .then((res) => {
+          const userData: UserData = res.data.data;
+          fetchIdentityCallbacks.current.push(resolve);
+          setIdentity(userData);
+        })
+        .catch((error) => {
+          setIdentity(null);
+          reject(error);
+        });
+    });
+  };
+
+  const login = async ({ username, password }: AuthData) => {
     const response = await apiClient.post('/auth/login', {
       username,
       password,
@@ -49,16 +83,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     if (response.status !== 200) {
       throw Error('failed to login');
     }
-    const accessToken = response.headers['authorization']
-      ?.toString()
-      .replace('Bearer: ', '')
-      .trim();
-    console.log('Authorization: ' + response.headers);
-    console.log('accessToken: ' + accessToken);
-    if (!accessToken) {
-      throw Error('Access token not provided');
-    }
-    Cookies.set('accessToken', accessToken, { expires: 4 });
+    retrieveAccessToken(response);
+    fetchIdentity();
   };
 
   const logout = async () => {
@@ -70,21 +96,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     if (response.status !== 200) {
       throw Error('failed to refresh');
     }
-    const accessToken = response.headers['authorization']
-      ?.toString()
-      .replace('Bearer: ', '')
-      .trim();
-    console.log('accessToken: ' + accessToken);
-    if (!accessToken) {
-      throw Error('Access token not provided');
-    }
-    Cookies.set('accessToken', accessToken, { expires: 4 });
+    retrieveAccessToken(response);
+    fetchIdentity();
   };
 
   return (
     <AuthContext.Provider
       value={{
         identity,
+        fetchIdentity,
         login,
         logout,
         refresh,
