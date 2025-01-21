@@ -3,6 +3,8 @@ import FormField from '../FormField/FormField';
 import styles from './SignInCard.module.css';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
+import Cookies from 'js-cookie';
 
 interface SignInCardProps {
   username?: string;
@@ -18,24 +20,18 @@ export default function SignInCard({
   const [username, setUsername] = useState(_username || '');
   const [password, setPassword] = useState(_password || '');
 
+  const { login } = useAuth()
+
   const onSubmit = () => {
-    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/auth/login`, {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        alert('로그인 성공! 기모따!');
+    login({username, password})
+      .then(() => {
+        alert('okay')
+        alert(`access Token: ${Cookies.get('accessToken')}`)
       })
       .catch((e) => {
-        console.log(e);
-      });
+        alert('아이고')
+        console.log(e)
+      })
   };
   return (
     <div className={classNames(className, styles.signInCard)}>
