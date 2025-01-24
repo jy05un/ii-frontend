@@ -16,7 +16,7 @@ import { useAuth } from 'hooks/useAuth';
 
 export default function Navbar({ className }: { className?: string }) {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const { identity, fetchIdentity, refresh } = useAuth();
+  const { identity, fetchIdentity, logout } = useAuth();
 
   const signInModalRef = useRef<HTMLDialogElement>(null);
   const profileModalRef = useRef<HTMLDialogElement>(null);
@@ -40,12 +40,11 @@ export default function Navbar({ className }: { className?: string }) {
   ];
 
   const onLoginChanged = ({ target }: { target: HTMLInputElement }) => {
-    identity()
     setLoggedIn(target.checked);
   };
 
   const onClickAccount = () => {
-    if (isLoggedIn) {
+    if (identity) {
       profileModalRef.current?.showModal();
     } else {
       signInModalRef.current?.showModal();
@@ -59,24 +58,22 @@ export default function Navbar({ className }: { className?: string }) {
         <button
           onClick={() =>
             fetchIdentity().then(() => {
-              alert(
-                'username: ' +
-                  identity?.username +
-                  ', \n' +
-                  'id: ' +
-                  identity?.id +
-                  ', \n' +
-                  'email: ' +
-                  identity?.email +
-                  ', \n' +
-                  'role: ' +
-                  identity?.role,
-              );
-              console.log(identity);
+              alert(identity?.username)
+            })
+            .catch((error) => {
+              alert('uh')
             })
           }
         >
-          {identity?.username || 'whoami'}
+          {identity?.username ?? 'whoami'}
+        </button>
+        <button
+          onClick={() =>
+            logout().then(() => alert('로그아웃'))
+          }
+          hidden={!identity}
+        >
+          logout
         </button>
       </div>
 
@@ -94,10 +91,10 @@ export default function Navbar({ className }: { className?: string }) {
       </div>
       <NavButton name="setting" link="/setting" icon={SettingUrl} />
       <PageModal ref={signInModalRef} link="/login">
-        <SignInCard />
+        <SignInCard onConfirm={() => signInModalRef.current?.close()}/>
       </PageModal>
       <PageModal ref={profileModalRef} link="/profile">
-        <ProfileCard />
+        <ProfileCard onConfirm={() => profileModalRef.current?.close()}/>
       </PageModal>
     </div>
   );

@@ -2,10 +2,11 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import FormField from 'components/FormField';
 import styles from './SignUpCard.module.css';
 import classNames from 'classnames';
+import FormCard, { FormCardProps } from 'components/FormCard/FormCard';
+import { useAuth } from 'hooks/useAuth';
 
-interface SignUpCardProps {
+interface SignUpCardProps extends FormCardProps {
   username?: string;
-  password?: string;
   email?: string;
   nickname?: string;
   className?: string;
@@ -13,100 +14,110 @@ interface SignUpCardProps {
 
 export default function SignUpCard({
   username: _username,
-  password: _password,
   email: _email,
   nickname: _nickname,
-  className
+  className,
+  onConfirm
 }: SignUpCardProps) {
+  const { validate, register } = useAuth()
   const [username, setUsername] = useState(_username || '');
   const [isUsernameValid, setUsernameValid] = useState(true);
 
-  const [password, setPassword] = useState(_password || '');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [isPasswordValid, setPasswordValid] = useState(true);
 
   const [email, setEmail] = useState(_email || '');
   const [isEmailValid, setEmailValid] = useState(true);
 
   const [nickname, setNickname] = useState(_nickname || '');
+  const [isNicknameValid, setNicknameValid] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => checkUsername(), 500);
+    const timeout = setTimeout(() => validateFields(), 2000);
     return () => {
       clearTimeout(timeout);
     };
-  }, [username]);
+  }, [username, password, passwordCheck, email, nickname]);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => checkEmail(), 300);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [email]);
+  const notice = (message: string) => {
+    alert(message)
+  }
 
-  const checkUsername = () => {
-    if (username === '') return;
-    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/api/users/exists/${username}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        setUsernameValid(result.status !== 'OK');
+  const validateFields = async () => {
+    try {
+      if (password !== passwordCheck) {
+        throw Error('password and passwordCheck does not match', { cause: { source: 'password', reason: 'pair' } })
+      }
+      await validate({
+        username: username || undefined,
+        password: password || undefined,
+        email: email || undefined,
+        nickname: nickname || undefined
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const emailPattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  const checkEmail = () => {
-    setEmailValid(emailPattern.test(email));
-  };
-
-  const onSubmit = () => {
-    checkEmail()
-    checkUsername()
-    if (!isUsernameValid) {
-      alert('username not valid');
-      return;
+      .catch((error) => {throw error})
+      if (username) setUsernameValid(true);
+      if (password) setPasswordValid(true);
+      if (email) setEmailValid(true);
+      if (nickname) setNicknameValid(true);
     }
-
-    if (!isEmailValid) {
-      alert('email not valid');
-      return;
+    catch ({ cause: { source, reason } }: any) {
+      console.log('caught')
+      switch (source) {
+        case 'username': {
+          if (reason === 'pattern') {
+            notice('username은 최소 5자, 최대 32자의 영문 대문자, 소문자, 숫자, 특수문자 -, _만 사용 가능합니다.')
+          } else if (reason === 'unique') {
+            notice('이미 존재하는 username입니다.')
+          }
+          setUsernameValid(false)
+          break;
+        }
+        case 'password': {
+          if (reason === 'pair') {
+            notice('password가 서로 일치하지 않습니다.')
+          } else if (reason === 'pattern') {
+            notice('비밀번호는 최소 8자, 최대 32자의 대문자, 소문자, 숫자, 특수 문자를 포함해야 합니다.')
+          }
+          setPasswordValid(false)
+          break;
+        }
+        case 'email': {
+          if (reason === 'pattern') {
+            notice(`${email}은 유효한 이메일이 아닙니다.`)
+          }
+          break;
+        }
+        case 'nickname': {
+          if (reason === 'pattern') {
+            notice('nickname은 최소 2자, 최대 16자여야 합니다.')
+          }
+          break;
+        }
+        case 'register': {
+          notice('서버 측에서 register에 실패했습니다')
+          break;
+        }
+      }
+      return false
     }
-    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/auth/register`, {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        nickname,
-      }),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        alert('회원가입 성공! 기모따!');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  }
+
+  const onSubmit = async () => {
+    if (await validateFields()) {
+      const identity = await register({ username, password, email, nickname })
+      alert(`hello, ${identity}!`)
+      onConfirm?.()
+    }
   };
 
   return (
-    <div className={classNames(className, styles.signUpCard)}>
+    <FormCard className={classNames(className, styles.signUpCard)} onSubmit={() => onSubmit()}>
       <div className={styles.header}>
         <h1 className={styles.title}> signup </h1>
       </div>
-      <form
-        className={styles.forms}
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
-        action="#"
+      <div
+        className={styles.fields}
       >
         <FormField
           className={classNames(styles.field, styles.id)}
@@ -122,11 +133,23 @@ export default function SignUpCard({
         <FormField
           className={classNames(styles.field, styles.password)}
           name="password"
-          title="PASSWORD"
+          title="password"
           value={password}
           type="password"
+          invalid={!isPasswordValid}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
+          }
+        />
+        <FormField
+          className={classNames(styles.field, styles.password)}
+          name="password 확인"
+          title="password 확인"
+          value={passwordCheck}
+          type="password"
+          invalid={!isPasswordValid}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPasswordCheck(e.target.value)
           }
         />
         <FormField
@@ -146,14 +169,15 @@ export default function SignUpCard({
           title="Nickname"
           value={nickname}
           type="nickname"
+          invalid={!isNicknameValid}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setNickname(e.target.value)
           }
         />
         <button className={styles.confirm} title="회원가입" type="submit">회원가입</button>
-      </form>
+      </div>
       <div className={styles.menus}>
       </div>
-    </div>
+    </FormCard>
   );
 }

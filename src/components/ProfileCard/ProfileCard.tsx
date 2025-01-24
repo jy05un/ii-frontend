@@ -2,10 +2,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import FormField from 'components/FormField';
 import styles from './ProfileCard.module.css';
 import classNames from 'classnames';
+import { useAuth } from 'hooks/useAuth';
+import FormCard from 'components/FormCard';
+import { FormCardProps } from 'components/FormCard/FormCard';
 
-interface ProfileCardProps {
+interface ProfileCardProps extends FormCardProps {
   username?: string;
-  password?: string;
   email?: string;
   nickname?: string;
   className?: string;
@@ -13,100 +15,39 @@ interface ProfileCardProps {
 
 export default function ProfileCard({
   username: _username,
-  password: _password,
   email: _email,
   nickname: _nickname,
-  className
+  className,
+  onConfirm
 }: ProfileCardProps) {
+  const { validate, register } = useAuth()
   const [username, setUsername] = useState(_username || '');
   const [isUsernameValid, setUsernameValid] = useState(true);
 
-  const [password, setPassword] = useState(_password || '');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [isPasswordValid, setPasswordValid] = useState(true);
 
   const [email, setEmail] = useState(_email || '');
   const [isEmailValid, setEmailValid] = useState(true);
 
   const [nickname, setNickname] = useState(_nickname || '');
+  const [isNicknameValid, setNicknameValid] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => checkUsername(), 500);
+    const timeout = setTimeout(() => {}, 2000);
     return () => {
       clearTimeout(timeout);
     };
-  }, [username]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => checkEmail(), 300);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [email]);
-
-  const checkUsername = () => {
-    if (username === '') return;
-    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/api/users/exists/${username}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        setUsernameValid(result.status !== 'OK');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const emailPattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  const checkEmail = () => {
-    setEmailValid(emailPattern.test(email));
-  };
-
-  const onSubmit = () => {
-    checkEmail()
-    checkUsername()
-    if (!isUsernameValid) {
-      alert('username not valid');
-      return;
-    }
-
-    if (!isEmailValid) {
-      alert('email not valid');
-      return;
-    }
-    fetch(`${process.env.REACT_APP_WAS_SERVER as string}/auth/register`, {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        nickname,
-      }),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        alert('회원가입 성공! 기모따!');
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  }, [username, password, passwordCheck, email, nickname]);
 
   return (
-    <div className={classNames(className, styles.profileCard)}>
+    <FormCard className={classNames(className, styles.profileCard)} onSubmit={() => null}>
       <div className={styles.header}>
         <h1 className={styles.title}> profile </h1>
       </div>
-      <form
-        className={styles.forms}
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
-        action="#"
+      <div
+        className={styles.fields}
       >
         <FormField
           className={classNames(styles.field, styles.id)}
@@ -151,10 +92,10 @@ export default function ProfileCard({
           }
         />
         <button type="submit" hidden></button>
-      </form>
+      </div>
       <div className={styles.menus}>
 
       </div>
-    </div>
+    </FormCard>
   );
 }
