@@ -35,7 +35,7 @@ export default function ProfileCard({
   const [isNicknameValid, setNicknameValid] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {}, 2000);
+    const timeout = setTimeout(() => {  return  }, 2000);
     return () => {
       clearTimeout(timeout);
     };
