@@ -5,8 +5,10 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
 import Cookies from 'js-cookie';
+import FormCard from 'components/FormCard';
+import { FormCardProps } from 'components/FormCard/FormCard';
 
-interface SignInCardProps {
+interface SignInCardProps extends FormCardProps{
   username?: string;
   password?: string;
   className?: string;
@@ -16,6 +18,7 @@ export default function SignInCard({
   username: _username,
   password: _password,
   className,
+  onConfirm
 }: SignInCardProps) {
   const [username, setUsername] = useState(_username || '');
   const [password, setPassword] = useState(_password || '');
@@ -26,7 +29,7 @@ export default function SignInCard({
     login({username, password})
       .then(() => {
         alert('okay')
-        alert(`access Token: ${Cookies.get('accessToken')}`)
+        onConfirm?.()
       })
       .catch((e) => {
         alert('아이고')
@@ -34,17 +37,12 @@ export default function SignInCard({
       })
   };
   return (
-    <div className={classNames(className, styles.signInCard)}>
+    <FormCard className={classNames(className, styles.signInCard)} onSubmit={()=> onSubmit()}>
       <div className={styles.header}>
         <h1 className={styles.title}> signin </h1>
       </div>
-      <form
-        className={styles.forms}
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
-        action="#"
+      <div
+        className={styles.fields}
       >
         <FormField
           className={classNames(styles.field, styles.id)}
@@ -69,7 +67,7 @@ export default function SignInCard({
         <button className={styles.confirm} title="로그인" type="submit">
           로그인
         </button>
-      </form>
+      </div>
       <div className={styles.menus}>
         <Link to="/signup">
           <span> 회원가입</span>
@@ -79,6 +77,6 @@ export default function SignInCard({
         <span> 도움... </span>
         */}
       </div>
-    </div>
+    </FormCard>
   );
 }
