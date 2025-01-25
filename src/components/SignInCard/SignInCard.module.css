@@ -15,6 +15,70 @@
   margin: 0 auto;
 }
 
+.naverLoginButton {
+  min-width: 250px;
+  width: 25vw;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.naverLoginButton:hover {
+  cursor: pointer;
+  background-color: rgba(195, 231, 194, 0.212);
+}
+
+.naverLoginButton:active {
+  background-color: rgba(195, 231, 194, 0.5);
+}
+
+.naverLoginWrapper {
+  display: flex;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.naverLoginLogo {
+  background-image: url('../../../public/icon/naver_logo.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.loginSeperatorWrapper {
+  display: flex;
+  min-width: 250px;
+  width: 25vw;
+  align-items: center;
+}
+
+.loginSeperatorText {
+  text-align: center;
+  line-height: 22px;
+  width: 10%;
+  color: rgb(221, 221, 221);
+}
+
+.loginSeperatorLine:first-child {
+  margin-left: 10px;
+  width: 45%;
+  height: 0;
+  border: 0.5px solid rgb(221, 221, 221);
+}
+
+.loginSeperatorLine:last-child {
+  margin-left: auto;
+  margin-right: 10px;
+  width: 45%;
+  height: 0;
+  border: 0.5px solid rgb(221, 221, 221);
+}
+
 .fields {
   width: 60%;
   display: flex;
@@ -25,7 +89,8 @@
 }
 
 .field {
-  
+  min-width: 250px;
+  width: 25vw;
 }
 
 .id {
@@ -37,15 +102,33 @@
 }
 
 .confirm {
+  border: none;
+  border-radius: 8px;
   height: 3em; 
-  width: 100%;
+  min-width: 250px;
+  width: 25vw;
+  background-color: #1DA1F2;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .menus {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  justify-content:  space-between;
-  align-items: center;
-  padding: 1em 2em;
+  margin-left: auto;
+}
+
+.menuLink {
+  margin-left: 10px;
+  color: #1DA1F2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menuLink:hover {
+  color: #1292e2;
+}
+
+.menuLink:active {
+  color: #0898f1;
 }

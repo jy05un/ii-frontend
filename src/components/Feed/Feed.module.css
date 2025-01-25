@@ -102,7 +102,7 @@
 }
 
 .viewBeforeButtonIcon {
-  background: url('../../../public/img/TJztmXpWTmS.png') no-repeat -130px -98px;
+  background: url('../../../public/icon/TJztmXpWTmS.png') no-repeat -130px -98px;
 	width: 30px;
 	height: 30px;
 }
@@ -125,7 +125,7 @@
 }
 
 .viewNextButtonIcon {
-  background: url('../../../public/img/TJztmXpWTmS.png') no-repeat -162px -98px;
+  background: url('../../../public/icon/TJztmXpWTmS.png') no-repeat -162px -98px;
 	width: 30px;
 	height: 30px;
 }
@@ -216,28 +216,28 @@
 }
 
 .like {
-  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -87px -137px;
+  background: url('../../../public/icon/Kq06toTJMFl.png') no-repeat -87px -137px;
 	width: 24px;
 	height: 22px;
   margin-right: 12px;
 }
 
 .comment {
-  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -37px -136px;
+  background: url('../../../public/icon/Kq06toTJMFl.png') no-repeat -37px -136px;
 	width: 24px;
 	height: 24px;
   margin-right: 12px;
 }
 
 .share {
-  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -51px -173px;
+  background: url('../../../public/icon/Kq06toTJMFl.png') no-repeat -51px -173px;
 	width: 21px;
 	height: 24px;
   margin-right: 12px;
 }
 
 .save {
-  background: url('../../../public/img/Kq06toTJMFl.png') no-repeat -28px -173px;
+  background: url('../../../public/icon/Kq06toTJMFl.png') no-repeat -28px -173px;
 	width: 19px;
 	height: 24px;
   margin-left: auto;
