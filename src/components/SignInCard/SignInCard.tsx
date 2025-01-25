@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import FormCard from 'components/FormCard';
 import { FormCardProps } from 'components/FormCard/FormCard';
 
-interface SignInCardProps extends FormCardProps{
+interface SignInCardProps extends FormCardProps {
   username?: string;
   password?: string;
   className?: string;
@@ -26,7 +26,7 @@ export default function SignInCard({
   const { login } = useAuth()
 
   const onSubmit = () => {
-    login({username, password})
+    login({ username, password })
       .then(() => {
         alert('okay')
         onConfirm?.()
@@ -37,13 +37,26 @@ export default function SignInCard({
       })
   };
   return (
-    <FormCard className={classNames(className, styles.signInCard)} onSubmit={()=> onSubmit()}>
+    <FormCard className={classNames(className, styles.signInCard)} onSubmit={() => onSubmit()}>
       <div className={styles.header}>
-        <h1 className={styles.title}> signin </h1>
+        <h1 className={styles.title}> 로그인 </h1>
       </div>
       <div
         className={styles.fields}
       >
+        <div className={styles.naverLoginButton}>
+          <div className={styles.naverLoginWrapper}>
+            <div className={styles.naverLoginLogo}></div>
+            <span>네이버로 로그인</span>
+          </div>
+        </div>
+        <div className={styles.loginSeperatorWrapper}>
+          <div className={styles.loginSeperatorLine}></div>
+          <div className={styles.loginSeperatorText}>
+            OR
+          </div>
+          <div className={styles.loginSeperatorLine}></div>
+        </div>
         <FormField
           className={classNames(styles.field, styles.id)}
           name="username"
@@ -67,15 +80,15 @@ export default function SignInCard({
         <button className={styles.confirm} title="로그인" type="submit">
           로그인
         </button>
-      </div>
-      <div className={styles.menus}>
-        <Link to="/signup">
-          <span> 회원가입</span>
-        </Link>
-
-        {/*
+        <div className={styles.menus}>
+          <span>계정이 없으신가요?</span>
+          <Link className={styles.menuLink} to="/signup">
+            <span>회원가입</span>
+          </Link>
+          {/*
         <span> 도움... </span>
         */}
+        </div>
       </div>
     </FormCard>
   );

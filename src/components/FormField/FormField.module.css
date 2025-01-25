@@ -5,12 +5,18 @@
   width: 100%;
 }
 
+input {
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
 .fieldInput {
   border-radius: 8px;
   border: 2px solid black;
   outline: none;
   height: 3em;
-  width: calc(100% - var(--pad));
+  width: calc(100%);
 }
 
 .fieldInput::placeholder {
@@ -25,7 +31,6 @@
   transition: transform 200ms;
   background: white;
   transform-origin: left;
-  translate: -.3em;
 }
 
 .fieldInputWrong:not(:placeholder-shown){
