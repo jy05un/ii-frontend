@@ -8,11 +8,9 @@ export default function FormCard({ className, children, onSubmit }: {
   children?: ReactNode,
   onSubmit?: () => void;
 }) {
-  return <div className={classNames(className, styles.formCard)}>
-    <form className={styles.form} onSubmit={(e) => {e.preventDefault(); onSubmit?.();}}>
-      {children}
-    </form>
-  </div>;
+  return <form className={classNames(className, styles.formCard)} onSubmit={(e) => { e.preventDefault(); onSubmit?.(); }}>
+    {children}
+  </form>
 }
 
 export interface FormCardProps {

@@ -85,9 +85,6 @@ export default function SignInCard({
           <Link className={styles.menuLink} to="/signup">
             <span>회원가입</span>
           </Link>
-          {/*
-        <span> 도움... </span>
-        */}
         </div>
       </div>
     </FormCard>

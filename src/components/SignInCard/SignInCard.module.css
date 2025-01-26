@@ -2,13 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 400px;
+  min-height: 400px;
+  width:fit-content;
+  height: fit-content;
 }
 
 .header {
   display: flex;
   justify-content: center;
   text-align:center;
-  height: 5em;
+  min-height: 5em;
 }
 
 .title {
@@ -17,7 +21,6 @@
 
 .naverLoginButton {
   min-width: 250px;
-  width: 25vw;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -53,7 +56,6 @@
 .loginSeperatorWrapper {
   display: flex;
   min-width: 250px;
-  width: 25vw;
   align-items: center;
 }
 
@@ -80,7 +82,7 @@
 }
 
 .fields {
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -89,8 +91,7 @@
 }
 
 .field {
-  min-width: 250px;
-  width: 25vw;
+  min-width: 100px;
 }
 
 .id {
@@ -106,11 +107,11 @@
   border-radius: 8px;
   height: 3em; 
   min-width: 250px;
-  width: 25vw;
   background-color: #1DA1F2;
   color: white;
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .menus {
