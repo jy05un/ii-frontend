@@ -1,14 +1,27 @@
 .signInPage {
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
   background-size: contain;
 }
 
+.navheader {
+  width: 100%
+} 
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background-size: contain;
+}
+
 .header {
-  width: 50vw;
-  height: auto;
+  min-width: 40vw;
+  min-height: 40vh;
+  flex-grow: 1;
   position: relative;
 }
 
@@ -48,6 +61,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  margin: 3em 1em;
 }
 
 .signInCard {
@@ -61,12 +75,14 @@
 }
 
 .footer {
+  text-align: center;
+  margin: 1em auto;
 }
 
 
 @media (max-width: 767px) {
   /* 모바일 스타일 */
-  .signInPage {
+  .main {
     flex-direction: column;
   }
   .header {
@@ -75,13 +91,13 @@
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   /* 태블릿 스타일 */
-  .signInPage {
+  .main {
     flex-direction: row;
   }
 }
 @media (min-width: 1025px) {
   /* 데스크톱 스타일 */
-  .signInPage {
+  .main {
     flex-direction: row;
   }
 }

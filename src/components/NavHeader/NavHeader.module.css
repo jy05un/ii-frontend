@@ -1,0 +1,11 @@
+.navheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.15);
+}
+
+.button {
+    margin: 0.7em;
+    cursor: pointer;
+}

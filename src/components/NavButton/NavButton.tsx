@@ -1,26 +1,28 @@
 import React, { ReactElement } from 'react';
-import styles from './NavBar.module.css';
+import styles from './NavButton.module.css';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 export interface NavButtonProps {
   name: string;
   icon: string;
+  className?: string;
   link?: string;
   onClick?: () => void;
 }
 
-export default function NavButton({ icon, link, onClick }: NavButtonProps) {
+export default function NavButton({ icon, link, onClick, className }: NavButtonProps) {
   if (link) {
     return (
       <Link to={link}>
-        <div className={styles.button}>
+        <div className={classNames(className, styles.button)}>
           <img src={icon} alt="button" />
         </div>
       </Link>
     );
   } else {
     return (
-      <div className={styles.button} onClick={() => onClick?.()}>
+      <div className={classNames(className, styles.button)} onClick={() => onClick?.()}>
         <img src={icon} alt="button" />
       </div>
     );

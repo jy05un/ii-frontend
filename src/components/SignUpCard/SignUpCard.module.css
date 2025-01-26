@@ -2,13 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 400px;
+  min-height: 400px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .header {
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 5em;
+  min-height: 5em;
 }
 
 .title {
@@ -16,7 +20,8 @@
 }
 
 .fields {
-  width: 60%;
+  width: 80%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -25,6 +30,7 @@
 }
 
 .field {
+  min-width: 100px;
 }
 
 .id {
@@ -32,17 +38,19 @@
 
 .password {
 }
-
 .confirm {
+  border: none;
+  border-radius: 8px;
   height: 3em;
-  width: 100%;
+  min-width: 250px;
+  background-color: #1DA1F2;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .menus {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em 2em;
+  margin-left: auto;
 }

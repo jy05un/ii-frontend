@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import styles from './SignInPage.module.css';
 import classNames from 'classnames';
+import NavHeader from 'components/NavHeader';
 
 export default function SignInPage() {
   const navigate = useNavigate()
@@ -24,30 +25,33 @@ export default function SignInPage() {
 
   return (
     <div className={styles.signInPage}>
-      <div className={styles.header}>
-        <div className={
-          classNames(styles.headerTop,
-            {
-              [styles.headerTopX]: index == 0
-            },
-            {
-              [styles.headerTopIg]: index == 1
-            },
-            {
-              [styles.headerTopCafe]: index == 2
-            },
-            {
-              [styles.headerTopSoop]: index == 3
-            },
-            {
-              [styles.headerTopActive]: isActive
-            })
-        }></div>
-      </div>
-      <div className={styles.wrapper}>
-        <SignInCard className={styles.signInCard} onConfirm={() => navigate("/feeds")} />
-        <div className={styles.footer}>
-          <p> footer </p>
+      <NavHeader className={styles.navheader} onReturn={() => navigate(-1)} />
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <div className={
+            classNames(styles.headerTop,
+              {
+                [styles.headerTopX]: index == 0
+              },
+              {
+                [styles.headerTopIg]: index == 1
+              },
+              {
+                [styles.headerTopCafe]: index == 2
+              },
+              {
+                [styles.headerTopSoop]: index == 3
+              },
+              {
+                [styles.headerTopActive]: isActive
+              })
+          }></div>
+        </div>
+        <div className={styles.wrapper}>
+          <SignInCard className={styles.signInCard} onConfirm={() => navigate("/feeds")} />
+          <div className={styles.footer}>
+            <p> footer </p>
+          </div>
         </div>
       </div>
     </div>

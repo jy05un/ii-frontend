@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import NavButton, { NavButtonProps } from './NavButton';
+import NavButton, { NavButtonProps } from '../NavButton/NavButton';
 import styles from './NavBar.module.css';
 import AccountUrl from './icon_account.svg';
 import BoardUrl from './icon_board.svg';
@@ -77,11 +77,12 @@ export default function Navbar({ className }: { className?: string }) {
         </button>
       </div>
 
-      <NavButton name="account" icon={AccountUrl} onClick={onClickAccount} />
+      <NavButton className={styles.button} name="account" icon={AccountUrl} onClick={onClickAccount} />
 
       <div className={styles.buttons}>
         {buttonInfos.map((info) => (
           <NavButton
+            className={styles.button}
             key={info.name}
             name="login"
             link={info.link}
@@ -89,7 +90,7 @@ export default function Navbar({ className }: { className?: string }) {
           />
         ))}
       </div>
-      <NavButton name="setting" link="/setting" icon={SettingUrl} />
+      <NavButton className={styles.button} name="setting" link="/setting" icon={SettingUrl} />
       <PageModal ref={signInModalRef} link="/login">
         <SignInCard onConfirm={() => signInModalRef.current?.close()}/>
       </PageModal>
