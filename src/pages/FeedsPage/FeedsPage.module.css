@@ -4,37 +4,68 @@ body {
 }
 
 .feedsPage {
+  flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  height: 100%;
-  overflow-y: scroll;
-  align-items: center;
 }
 
-.feedsCategoryList {
-  position: fixed;
-  bottom: 20px;
+.feedsBody {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
+  overflow-x: visible;
+  gap: 1em;
   z-index: 1;
 }
 
 .feedsArray {
-  flex-grow: 1;
-  min-width: 400px;
-  max-width: 548px;
-  width: 40vw;
+  position: relative;
   margin: 0 auto;
+  z-index: 1;
+  overflow-x: visible;
+  overflow-y: scroll;
+  height:100vh;
 }
 
+.feedsCategoryList {
+  z-index: 10;
+  position: sticky;
+  flex-direction: column;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: auto;
+}
+
+
 .feeds {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1em;
 }
 
 .feed {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+  .feedsBody {
+    flex-direction: column;
+  }
+
+  .feedsCategoryList {
+    position: absolute;
+    top: 85%;
+    /*left: 60%; */
+    transform: translateY(25%); 
+    margin: 0 auto;
+    flex-direction: row;
+  }
 }

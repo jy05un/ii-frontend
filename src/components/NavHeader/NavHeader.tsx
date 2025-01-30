@@ -1,3 +1,4 @@
+import React from 'react'
 import NavButton from "components/NavButton/NavButton";
 import styles from "./NavHeader.module.css"
 import BackUrl from "./icon_back.svg"

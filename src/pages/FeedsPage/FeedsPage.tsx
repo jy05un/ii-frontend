@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './FeedsPage.module.css';
 import Feed from 'components/Feed';
 import { FeedProps, AttachmentType, Img } from 'components/Feed/Feed';
+import ToggleList from 'components/ToggleList/ToggleList';
 
 
 export default function FeedsPage() {
@@ -41,7 +42,7 @@ export default function FeedsPage() {
       logoUrl: "https://x.com/"
     },
     {
-      id: 1,
+      id: 2,
       profile: {
         name: "주르르",
         id: "@jururu_twitch",
@@ -75,7 +76,7 @@ export default function FeedsPage() {
       logoUrl: "https://x.com/"
     },
     {
-      id: 1,
+      id: 3,
       profile: {
         name: "주르르",
         id: "@jururu_twitch",
@@ -109,7 +110,7 @@ export default function FeedsPage() {
       logoUrl: "https://x.com/"
     },
     {
-      id: 1,
+      id: 4,
       profile: {
         name: "주르르",
         id: "@jururu_twitch",
@@ -143,7 +144,7 @@ export default function FeedsPage() {
       logoUrl: "https://x.com/"
     },
     {
-      id: 1,
+      id: 5,
       profile: {
         name: "주르르",
         id: "@jururu_twitch",
@@ -180,24 +181,27 @@ export default function FeedsPage() {
 
   return (
     <div className={styles.feedsPage}>
-      <div className={styles.feedsArray}>
-        <div className={styles.feeds}>
-          {feedsList.map((f) => (
-            <Feed
-              className={styles.feed}
-              key={f.id}
-              profile={f.profile}
-              source={f.source}
-              title={f.title}
-              content={f.content}
-              date={f.date}
-              url={f.url}
-              attachments={f.attachments}
-              logoImgUrl={f.logoImgUrl}
-              logoUrl={f.logoUrl}
-            />
-          ))}
+      <div className={styles.feedsBody}>
+        <div className={styles.feedsArray}>
+            <div className={styles.feeds}>
+              {feedsList.map((f) => (
+                <Feed
+                  className={styles.feed}
+                  key={f.id}
+                  profile={f.profile}
+                  source={f.source}
+                  title={f.title}
+                  content={f.content}
+                  date={f.date}
+                  url={f.url}
+                  attachments={f.attachments}
+                  logoImgUrl={f.logoImgUrl}
+                  logoUrl={f.logoUrl}
+                />
+              ))}
+            </div>
         </div>
+        <ToggleList className={styles.feedsCategoryList} onCategoryChanged={(category) => console.log(category)} />
       </div>
     </div>
   );
