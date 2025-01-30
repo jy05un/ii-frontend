@@ -12,6 +12,14 @@ import BoardPage from 'pages/BoardPage';
 import ProfilePage from 'pages/ProfilePage';
 
 function App() {
+  const preloadImage = (url: string) => {
+    const img = new Image();
+    img.src = url;
+  };
+  preloadImage("/public/icon/instagram_white.svg");
+  preloadImage("/public/icon/instagram.svg");
+
+
   return (
     <div id='app-root'>
       <BrowserRouter>

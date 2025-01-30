@@ -1,0 +1,83 @@
+.list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+    border-radius: 15px;
+    z-index: 10;
+    background-color: #1DA1F2;
+    padding: 10px 10px;
+    border-radius: 25px;
+    gap: 1em;
+}
+
+
+.item {
+    color: white;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #1DA1F2;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75%;
+    transition: background-image 0.3s ease-in-out,background-color 0.3s, transform 0.3s ease-in-out;
+}
+
+.item {
+    width: 24px;
+    height: 24px;   
+}
+
+.item:hover {
+    background-color: #167fbf;
+}
+
+.item__activated {
+    color: #1DA1F2;
+    background-color: #eeeeee;
+    box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.item__activated:hover {
+    background-color: white;
+}
+
+.item.instagram {
+    background-image: url('../../../public/icon/instagram_white.svg');
+}
+
+.item__activated.instagram {
+    background-image: url('../../../public/icon/instagram.svg');
+}
+
+.item.soop {
+    background-image: url('../../../public/icon/soop_white.svg');
+}
+
+.item__activated.soop {
+    background-image: url('../../../public/icon/soop.svg');
+}
+
+.item.x {
+    background-size: 65%;
+    background-image: url('../../../public/icon/x_white.svg');
+}
+
+.item__activated.x {
+    background-image: url('../../../public/icon/x.svg');
+}
+
+.item.naver {
+    background-size: 85%;
+    background-image: url('../../../public/icon/naver.svg');
+}
+
+.item__activated.naver {
+    background-image: url('../../../public/icon/naver_white.svg');
+}
+
+.item__activated.naver:hover {
+    background-color: white;
+}
