@@ -4,11 +4,23 @@ body {
 }
 
 .feedsPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 100%;
   overflow-y: scroll;
+  align-items: center;
+}
+
+.feedsCategoryList {
+  position: fixed;
+  bottom: 20px;
+  align-items: center;
+  z-index: 1;
 }
 
 .feedsArray {
+  flex-grow: 1;
   min-width: 400px;
   max-width: 548px;
   width: 40vw;
